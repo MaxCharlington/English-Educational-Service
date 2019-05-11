@@ -1,0 +1,27 @@
+{
+  "name": "english",
+  "version": "1.0.0",
+  "description": "Website for video lectures and testing students",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "nodemon index.js",
+    "build": "webpack -p",
+    "watch": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jshint": "^2.10.2",
+    "jshint-loader": "^0.8.4",
+    "nodemon": "^1.19.0",
+    "webpack": "^4.31.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.7"
+  }
+}
