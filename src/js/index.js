@@ -1,5 +1,6 @@
-import help from './helperFuncs.js';
+import $ from "jquery";
+import lib from './lib.js';
 
 window.onload = () => {
-    alert(help.randomStr(10));
+    $('body').html(lib.randomStr(5));
 }

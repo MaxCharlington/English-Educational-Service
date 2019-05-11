@@ -2,13 +2,12 @@
   "name": "english",
   "version": "1.0.0",
   "description": "Website for video lectures and testing students",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "npm run start-watch && npm run wp-server",
-    "start": "node index.js",
-    "test": "nodemon index.js",
-    "build": "webpack -p && node-sass src/sass/ -o public/css/",
-    "watch": "webpack --watch"
+    "start": "node app.js",
+    "test": "nodemon app.js",
+    "build": "webpack -p && node-sass src/sass/ -o public/css/ --output-style compressed"
   },
   "author": "",
   "license": "ISC",
@@ -24,14 +23,14 @@
     "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "jquery": "^3.4.1",
     "mongoose": "^5.5.7"
   },
   "nodemonConfig": {
     "ignore": [
-      "public/"
-    ],
-    "events": {
-      "restart": "npm run build"
-    }
+      "public/",
+      "src/",
+      "node_modules"
+    ]
   }
 }
