@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "extract-text-webpack-plugin": "^3.0.2",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.0",
     "webpack": "^4.31.0",
@@ -24,5 +25,10 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "mongoose": "^5.5.7"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "src/"
+    ]
   }
 }
