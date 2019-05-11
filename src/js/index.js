@@ -1,3 +1,5 @@
+import help from './helperFuncs.js';
+
 window.onload = () => {
-    document.body.innerText = "Hello world";
+    alert(help.randomStr());
 }
