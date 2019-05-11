@@ -1,4 +1,4 @@
-function randomStr(length = 16) {
+function RandomStr(length = 16) {
     var text = "";
     var possible = "ABCDEF0123456789";
     for (var i = 0; i < length; i++) {
@@ -7,4 +7,46 @@ function randomStr(length = 16) {
     return text;
 }
 
-export default {randomStr};
+function CreateRequest() {
+    var Request = false;
+    if (window.XMLHttpRequest) {
+        Request = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) {
+        try {
+            Request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch (CatchException) {
+            Request = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+    }
+    if (!Request) {
+        console.log('Unable to create XMLHttpRequest');
+    }
+    return Request;
+}
+
+function SendRequest(r_method, r_path, r_args, r_handler) {
+    var Request = CreateRequest();
+    if (!Request) {
+        return;
+    }
+    Request.onreadystatechange = function () {
+        if (Request.readyState == 4) {
+            r_handler(Request);
+        }
+    }
+    if (r_method.toLowerCase() == "get" && r_args.length > 0) {
+        r_path += "?" + r_args;
+        Request.open(r_method, r_path, true);
+    }
+    else if (r_method.toLowerCase() == "post") {
+        Request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+        Request.send(r_args);
+    }
+    else {
+        Request.send(null);
+    }
+}
+
+export default {RandomStr, SendRequest};
