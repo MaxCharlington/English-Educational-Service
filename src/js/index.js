@@ -1,5 +1,5 @@
 import help from './helperFuncs.js';
 
 window.onload = () => {
-    alert(help.randomStr(50));
+    alert(help.randomStr(10));
 }

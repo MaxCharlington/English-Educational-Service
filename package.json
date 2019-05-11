@@ -28,7 +28,10 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "src/"
-    ]
+      "public/"
+    ],
+    "events": {
+      "restart": "npm run build"
+    }
   }
 }
