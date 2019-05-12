@@ -1,5 +1,10 @@
-import $ from "jquery";
-import lib from './lib.js';
+//import $ from "jquery";
+//import lib from './lib.js';
+import '../sass/styles.scss';
 
-window.onload = () => {
+function b() { 
+    let a = () => {console.log("Hello")}; 
+    a();
 }
+
+b();

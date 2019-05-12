@@ -1,10 +1,29 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path'); 
 
 module.exports = {
+    mode: 'development',
     entry: './src/js/index.js',
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'public/js')
+        filename: 'index.js',
+        path: path.resolve(__dirname, 'public')
+    },
+    module: {
+        rules: [
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            }, 
+            {
+                test: /\.scss$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader"
+                ]
+            }
+        ]
     }
 };
