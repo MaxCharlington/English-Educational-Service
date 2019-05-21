@@ -1,18 +1,26 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+const 
+    express = require('express'),
+    app = express(),
+    bodyParser = require('body-parser'),
+    expressLogging = require('express-logging'),
+    logger = require('logops');
 
-app.set('view engine', 'ejs');
+//const database = require('./database.js');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(expressLogging(logger));
 app.use('/public', express.static('public'));
 
 
 app.get('/', function (req, res) {
-    res.render('./index.ejs', req.cookies);
+    res.sendFile(__dirname + "/index.html", req.cookies);
 });
+
+app.post('/', function (req, res) {
+    res.json(req.body);
+});
+
 
 app.listen(3000, function (err) {
     console.log(`Server started`);

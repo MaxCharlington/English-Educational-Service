@@ -4,10 +4,10 @@
   "description": "Website for video lectures and testing students",
   "main": "app.js",
   "scripts": {
-    "dev": "npm run start-watch && npm run wp-server",
-    "start": "node app.js",
-    "test": "nodemon app.js",
-    "build": "webpack",
+    "start": "node app",
+    "test": "nodemon app",
+    "dockerStart": "docker run -p 80:3000 --mount type=bind,source=M:/YandexDisk/Projects/InProgress/englishApp,target=/usr/src/app app",
+    "dockerStop": "docker stop $(docker ps -q --filter ancestor=app)",
     "watch": "webpack --watch"
   },
   "author": "",
@@ -15,9 +15,9 @@
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
-    "extract-text-webpack-plugin": "^3.0.2",
     "node-sass": "^4.12.0",
     "nodemon": "^1.19.0",
     "path": "^0.12.7",
@@ -28,11 +28,12 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-logging": "^1.1.1",
     "jquery": "^3.4.1",
-    "mongoose": "^5.5.7"
+    "logops": "^2.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "nodemonConfig": {
     "ignore": [

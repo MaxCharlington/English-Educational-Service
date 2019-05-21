@@ -15,6 +15,14 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.ts$/,
+                use: 'ts-loader'
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
             }, 
             {
                 test: /\.scss$/,
@@ -25,5 +33,10 @@ module.exports = {
                 ]
             }
         ]
+    },
+    resolve: {
+        alias: {
+            'jquery': path.resolve(path.join(__dirname, 'node_modules', 'jquery'))
+        }
     }
 };
