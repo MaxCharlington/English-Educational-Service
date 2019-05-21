@@ -1,7 +1,7 @@
 const path = require('path'); 
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/js/index.js',
     output: {
         filename: 'index.js',
@@ -36,7 +36,9 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'jquery': path.resolve(path.join(__dirname, 'node_modules', 'jquery'))
+            'jquery': path.resolve(path.join(__dirname, 'node_modules', 'jquery')),
+            'react': path.resolve(path.join(__dirname, 'node_modules', 'react')),
+            'react-dom': path.resolve(path.join(__dirname, 'node_modules', 'react-dom'))
         }
     }
 };
