@@ -1,19 +1,21 @@
 //Sass styles
-import '../styles/styles.scss';
+import '../styles/styles.scss'
+
+//Animations
+import '../styles/animations.css'
 
 //JS
-import React from "react";
-import ReactDOM from "react-dom";
-import $ from "jquery";
+import React from "react"
+import ReactDOM from "react-dom"
 
 //Custom project related scripts
-import Animations from '../animations/animations.js';
-import lib from './lib.js';
 
 //React app component
-import App from '../components/App';
+import App from '../components/App'
 
-$('document').ready(() => {
-    var anim = new Animations();
-    ReactDOM.render(<App />, $(".app")[0]);
-});
+window.onload = ()=>{
+    ReactDOM.render(<App />, document.getElementById('app'));
+    if (!navigator.cookieEnabled) {
+        alert('Включите cookie для комфортной работы с этим сайтом');
+    }
+};

@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node app",
     "test": "nodemon app",
-    "dockerStart": "docker run -p 80:3000 --mount type=bind,source=M:/YandexDisk/Projects/InProgress/englishApp,target=/usr/src/app app",
+    "dockerStart": "docker run -p 80:3000 --mount type=bind,source=M:/Projects/InProgress/englishApp,target=/usr/src/app app",
     "dockerStop": "docker stop $(docker ps -q --filter ancestor=app)",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch -d"
   },
   "author": "",
   "license": "ISC",
@@ -28,9 +28,9 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cleave.js": "^1.5.0",
     "express": "^4.16.4",
     "express-logging": "^1.1.1",
-    "jquery": "^3.4.1",
     "logops": "^2.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
