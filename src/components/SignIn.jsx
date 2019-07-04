@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import Header from './Header'
-import lib from '../js/lib';
+import {setCookie} from '../js/lib'
 
-export default class Registration extends Component {
+export default class SignIn extends Component {
     constructor() {
         super()
         this.state = { number: "" };
@@ -16,19 +15,19 @@ export default class Registration extends Component {
     };
 
     saveProfileData() {
-        document.cookie.setItem('num', document.reg.num.value);
-        document.cookie.setItem('name', document.reg.name.value);
+        setCookie('num', document.reg.num.value)
+        setCookie('name', document.reg.name.value)
     }
 
     render() {
         return (
-            <div id='Registration'>
-                <Header text='Регистрация' />
+            <div id='SignIn' className="zoomInRight animated flashy">
+                <h1>Войдите</h1>
                 <form name="reg">
                     <input type='text' name='num' placeholder='Номер студенческого' maxLength="6" value={this.state.number} onChange={this.handleChange}></input><br />
                     <input type='text' name='name' placeholder='ФИО' maxLength='50'></input>
                     <div onClick={() => {
-                        //this.props.applyState()
+                        this.props.nextPage()
                         //lib.sendPost()
                         this.saveProfileData()
                     }}>Войти</div>

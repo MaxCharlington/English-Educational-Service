@@ -3,25 +3,28 @@ const
     app = express(),
     bodyParser = require('body-parser'),
     expressLogging = require('express-logging'),
-    logger = require('logops');
+    logger = require('logops'),
+    compression = require('compression')
 
 //const database = require('./database.js');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(expressLogging(logger));
-app.use('/public', express.static('public'));
+//Middleware
+app.use(compression({ level: 9}))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(expressLogging(logger))
+app.use('/public', express.static('public'))
 
-
+//Request handlers
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + "/index.html", req.cookies);
-});
+    res.sendFile(__dirname + "/index.html", req.cookies)
+})
 
 app.post('/', function (req, res) {
     console.log(req.body)
-});
+})
 
-
+//Start server
 app.listen(3000, function (err) {
-    console.log(`Server started`);
-});
+    console.log(`Server started`)
+})

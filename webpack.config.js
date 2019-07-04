@@ -4,13 +4,25 @@ module.exports = {
     mode: 'production',
     entry: './src/js/index.js',
     output: {
-        filename: 'index.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'public')
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    name: 'vendors',
+                    test: /node_modules/,
+                    chunks: 'all',
+                    enforce: true
+                }
+            }
+        }
     },
     module: {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.m?jsx?$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
@@ -18,7 +30,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: [
+                    'style-loader', 
+                    'css-loader'
+                ],
             }, 
             {
                 test: /\.scss$/,

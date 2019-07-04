@@ -1,4 +1,4 @@
-function RandomStr(length = 16) {
+export function RandomStr(length = 16) {
     var text = "";
     var possible = "ABCDEF0123456789";
     for (var i = 0; i < length; i++) {
@@ -7,7 +7,7 @@ function RandomStr(length = 16) {
     return text;
 }
 
-function sendPost(request) {
+export function sendPost(request) {
     fetch("", {
         method: "post",
         headers: {
@@ -18,7 +18,7 @@ function sendPost(request) {
     console.log('sent')   
 }
 
-function sendGet(request) {
+export function sendGet(request) {
     return fetch("", {
         method: "get",
         headers: {
@@ -27,4 +27,23 @@ function sendGet(request) {
         body: typeof request === 'object' ? JSON.stringify(request) : request
     }) 
 }
-export default { RandomStr, sendPost};
+
+export function setCookie(name, value) {
+    document.cookie = `${name}=${value}; path=/;}`;
+}
+
+export function getCookie(name) {
+    var name = name + "="
+    var ca = document.cookie.split(';')
+    ca.forEach((c) => {
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            let rez = c.substring(name.length, c.length)
+            console.log(rez)
+            return rez
+        }
+    })
+    return "";
+}
