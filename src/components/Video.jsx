@@ -1,8 +1,14 @@
 import React from 'react'
-import Player from 'react-player'
+import { Player } from 'video-react';
+import "video-react/dist/video-react.css";
 
-export default function Video(props) {
+export default props => {
     return (
-        <Player id='Player' url={props.url}/>
-    )
-}
+        <div id='Video'>
+            <Player>
+                <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+            </Player>
+            <div className='button' onClick={props.next}>Перейти к вопросам ➜</div>
+        </div>
+    );
+};

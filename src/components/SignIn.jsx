@@ -24,9 +24,9 @@ export default class SignIn extends Component {
             <div id='SignIn' className="zoomInRight animated flashy">
                 <h1>Войдите</h1>
                 <form name="reg">
-                    <input type='text' name='num' placeholder='Номер студенческого' maxLength="6" value={this.state.number} onChange={this.handleChange}></input><br />
-                    <input type='text' name='name' placeholder='ФИО' maxLength='50'></input>
-                    <div onClick={() => {
+                    <input className='input' type='text' name='num' placeholder='Номер студенческого' maxLength="6" value={this.state.number} onChange={this.handleChange}></input><br />
+                    <input className='input' type='text' name='name' placeholder='ФИО' maxLength='50'></input>
+                    <div className='button' onClick={() => {
                         this.props.nextPage()
                         //lib.sendPost()
                         this.saveProfileData()

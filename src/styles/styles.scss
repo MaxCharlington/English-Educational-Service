@@ -19,7 +19,7 @@ body {
     #app {
         height: 100%;
 
-        #SignIn, #CourseList, #Course {
+        #SignIn, #CourseList, #Video  {
             position: relative; 
             top: 50%; 
             transform: translateY(-60%);
@@ -33,7 +33,7 @@ body {
                 margin: 0.2em 0 0.2em 0;
             }
 
-            div, input, button {
+            div.button, input.input {
                 padding: 0;
                 box-sizing: border-box;   
                 width: 100%;
@@ -52,11 +52,11 @@ body {
                 text-align: center;
             }
 
-            div, button {                
+            div.button {                
                 user-select: none;
             }
             
-            input {
+            input.input {
                 outline: none;
             }
 
@@ -67,11 +67,11 @@ body {
                 appearance: none
             }
 
-            div:last-of-type {          
+            div.button:last-of-type {          
                 margin-bottom: 1vh;
             }
             
-            div:hover {
+            div.button:hover {
                 transition: all 0.4s;
                 transform: scale(1.03, 1.03);
                 background-color: white;
@@ -86,4 +86,10 @@ body {
         width: 100%;
         min-width: 400px;
     }
+}
+
+.video-react .video-react-big-play-button {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
 }
