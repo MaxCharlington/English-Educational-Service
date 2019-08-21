@@ -14,8 +14,7 @@ export function sendPost(request) {
             'Content-Type': 'application/json'
         },
         body: typeof request === 'object' ? JSON.stringify(request) : request
-    }) 
-    console.log('sent')   
+    })  
 }
 
 export function sendGet(request) {
@@ -25,7 +24,7 @@ export function sendGet(request) {
             'Content-Type': 'application/json'
         },
         body: typeof request === 'object' ? JSON.stringify(request) : request
-    }) 
+    })
 }
 
 export function setCookie(name, value) {
@@ -33,17 +32,7 @@ export function setCookie(name, value) {
 }
 
 export function getCookie(name) {
-    var name = name + "="
-    var ca = document.cookie.split(';')
-    ca.forEach((c) => {
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            let rez = c.substring(name.length, c.length)
-            console.log(rez)
-            return rez
-        }
-    })
-    return "";
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
 }

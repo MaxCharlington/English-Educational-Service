@@ -1,43 +1,69 @@
 import React, { Component } from 'react'
 import SignIn from './SignIn.jsx'
-import Course from './Course.jsx';
-
-const pages = ['SignIn', 'Course'];
+import Question from './Question.jsx'
+import Video from './Video.jsx'
+import Result from './Result.jsx'
+import {setCookie, getCookie} from '../js/lib.js'
 
 export default class App extends Component {
     constructor() {       
         super()
-        this.state = {
-            page: 'SignIn'
+        let pages = [] 
+        console.log(getCookie('current'))
+        let current = parseInt(getCookie('current'))
+        let signedIn = current ? true : false
+        if (!signedIn) {
+            pages.push(<SignIn setCourseData={(data) => this.setCourseData(data)} nextPage={() => this.nextPage()} />)
+            current = 0
         }
-        this.nextPage = this.nextPage.bind(this);
+        else {
+            let courseData = JSON.parse(localStorage.getItem('courseData'))
+            let course = courseData.map((e) => e.url ? 
+                <Video url={e.url} next={()=>this.nextPage()} /> :
+                <Question next={()=>this.nextPage()} quest={e.quest} ans={e.ans} rightNums={e.rightNums} />)
+            pages.push(...course)
+        }
+        this.state = {
+            pages: pages,
+            current: current
+        }
+        this.nextPage = this.nextPage.bind(this)
+        this.setCourseData = this.setCourseData.bind(this)
     }  
     
-    nextPage(props) {
+    setCourseData(courseData) {
+        let pages = []
+        let current = 0
+        let course = courseData.map((e) => e.url ? 
+            <Video url={e.url} next={()=>this.nextPage()} /> :
+            <Question next={()=>this.nextPage()} quest={e.quest} ans={e.ans} rightNums={e.rightNums} />)
+        pages.push(...course)
+        this.setState((prevState) => {
+            return {
+                pages: [...prevState.pages, ...pages],
+                current: 0
+            }
+        })
+        console.log(JSON.stringify(courseData))
+        localStorage.setItem('courseData', JSON.stringify(courseData))
+    }
+
+    nextPage() {
         document.getElementById('app').firstChild.classList.toggle('zoomOutLeft')
-        setTimeout(()=>{
-            let page
-            props && ({ page } = props)
-            page ? this.setState({ page: page }) : this.setState((prevState) => {
-                let next = pages[pages.indexOf(prevState.page) + 1]
-                let dc = document.cookie
-
-                //Skipping SignIn Page if already signed
-                // if (next === 'SignIn' && dc.indexOf('name') > -1 && dc.indexOf('num') > -1)
-                //     next = pages[pages.indexOf(next) + 1]
-
-                return {page: next}
-            })   
+        setTimeout(() => {
+            document.getElementById('app').firstChild.classList.toggle('zoomOutLeft')
+            this.setState((prevState) => {
+                setCookie('current', prevState.current + 1)
+                return {
+                    pages: prevState.pages,
+                    current: prevState.current + 1
+                }
+            })
+            this.forceUpdate();   
         }, 220)        
     }
     
     render() {
-        switch (this.state.page) {
-            case 'SignIn':
-                return <SignIn nextPage={this.nextPage}/>
-            case 'Course':
-                return <Course />
-        }
-        return     
+        return this.state.pages[this.state.current]    
     }
 }
