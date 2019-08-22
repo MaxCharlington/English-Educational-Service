@@ -4,7 +4,17 @@ const
     bodyParser = require('body-parser'),
     expressLogging = require('express-logging'),
     logger = require('logops'),
-    compression = require('compression')
+    compression = require('compression'),
+    MongoClient = require('mongodb').MongoClient;
+
+// Connection URL to MongoDB
+const url = 'mongodb://localhost:27017';
+
+// Use connect method to connect to the server
+(async function () {
+    let client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true});
+    db = client.db('app');
+})()
 
 //const database = require('./database.js');
 
