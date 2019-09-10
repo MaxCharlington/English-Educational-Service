@@ -79,7 +79,7 @@ export default class App extends Component {
                 app.style.setProperty('--top', '50%');
                 app.style.setProperty('--transform', 'translateY(-50%)');
             }
-        }, 280);
+        }, 250);
         return this.state.pages[this.state.current]    
     }
 }

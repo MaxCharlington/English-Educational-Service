@@ -7,7 +7,7 @@ export default class Question extends Component {
     }
 
     ansClicked(n) {
-        console.log(n)//Put answer into 
+        //Put answer into database 
         this.props.next()
     }
 
