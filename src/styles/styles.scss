@@ -6,7 +6,6 @@ html {
 }
 
 body {
-    //display: none;
     background-color: #fffffc;
     align-items: center;  
     width: 60%;
@@ -14,18 +13,23 @@ body {
     min-width: 800px;
     max-width: 2000px;
     margin: 0 auto;
-    padding: 0 3vw 0 3vw;    
+    padding: 0 3vw 0 3vw;  
+    color: #691305;  
 
     #app {
+        --top: 50%;
+        --transform: translateY(-50%);
         height: 100%;
 
-        #SignIn, #CourseList, #Video, #Question  {
+        #SignIn, #CourseList, #Video, #Question, #Result  {
             position: relative; 
-            top: 50%; 
-            transform: translateY(-50%);
+            top: var(--top); 
+            transform: var(--transform);
             text-align: center;
+            user-select: none;
 
             h1 {
+                font-weight: inherit;
                 height: $el-height;
                 padding: 0.3em;
                 position: relative;
@@ -39,14 +43,16 @@ body {
                 width: 100%;
                 height: $el-height;
                 margin-top: 1vh;
+                border-radius: 0.2em;
                 line-height: $el-height;
                 font-size: 4.8vh;
-                box-shadow: 0px 3px 10px 0px rgba(114, 114, 114, 0.3);
+                box-shadow: 0px 3px 10px 0px #f8a44f;
                 z-index: 1;
                 text-align: center;
             }
 
-            div.quest {
+            div.quest, h1.comment {
+                box-shadow: none;
                 height: unset;
                 display: inline-block;
                 line-height: $el-height * 0.7;
@@ -58,19 +64,21 @@ body {
                 word-wrap: break-word;
             }
 
-            input.input::-webkit-input-placeholder {
+            /*input.input::-webkit-input-placeholder {
                 text-align: center;
             }
             
             input.input:-moz-placeholder {
                 text-align: center;
+            }*/
+            
+            ::placeholder {
+                color: #691305;
+                opacity: 0.4;
             }
 
-            div.button {                
-                user-select: none;
-            }
-            
             input.input {
+                border-width: 0px;
                 outline: none;
             }
 
@@ -78,18 +86,29 @@ body {
             input[type=number]::-webkit-outer-spin-button { 
                 -webkit-appearance: none;
                 -moz-appearance: none;
-                appearance: none
+                appearance: none;
             }
 
-            div.button:last-of-type {          
-                margin-bottom: 1vh;
+            div.video-react {
+                font-family: unset;
+                background-color: unset;
+
+                div.video-react-control-bar {
+                    background-color: inherit;
+                }
+            }
+
+            input.input:last-of-type, div.video-react {                
+                margin-bottom: 2vh;
             }
             
-            div.button:hover, div.ans:hover {
+            div.button:hover, div.ans:hover, input.input:focus {
                 transition: all 0.4s;
                 transform: scale(1.03, 1.03);
                 background-color: white;
-                box-shadow: 0px 5px 15px 0px rgba(114, 114, 114, 0.5);
+                box-shadow: 0px 5px 15px 0px #f8a44f;
+                border-bottom: 0.15em solid orange;
+                color: #351304;
             }
         }
     }

@@ -29,9 +29,6 @@ app.use('/public', express.static('public'))
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/index.html", req.cookies)
 })
-app.get('/videos/:name', function (req, res) {
-    res.sendFile(__dirname + "/videos/" + req.params.name, req.cookies)
-})
 
 app.post('/', function (req, res) {
     console.log(req.body)
