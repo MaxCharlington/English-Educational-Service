@@ -34,6 +34,10 @@ app.post('/', function (req, res) {
     console.log(req.body)
 })
 
+app.get('/result', function (req, res) {
+    res.send('{"result": "80%"}')
+})
+
 //Start server
 app.listen(3000, function (err) {
     console.log(`Server started`)

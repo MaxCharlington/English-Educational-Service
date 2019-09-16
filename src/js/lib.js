@@ -7,24 +7,14 @@ export function RandomStr(length = 16) {
     return text;
 }
 
-export function sendPost(request) {
-    fetch("", {
+export function post(url, request) {
+    fetch(url, {
         method: "post",
         headers: {
             'Content-Type': 'application/json'
         },
         body: typeof request === 'object' ? JSON.stringify(request) : request
     })  
-}
-
-export function sendGet(request) {
-    return fetch("", {
-        method: "get",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: typeof request === 'object' ? JSON.stringify(request) : request
-    })
 }
 
 export function setCookie(name, value) {
