@@ -20,11 +20,13 @@ export default class App extends Component {
             //Create pages from storage
             pages.push(null) //Instead of SignIn page for current value to work properly
             let courseData = JSON.parse(localStorage.getItem('courseData'))
-            let course = courseData.map((e) => e.url ? 
-                <Video url={e.url} next={()=>this.nextPage()} /> :
-                <Question next={()=>this.nextPage()} quest={e.quest} ans={e.ans} rightNums={e.rightNums} />)
+            let course = courseData.map((e) => {
+                return e.url ? 
+                <Video url={e.url} next={()=>this.nextPage()} /> : (e.quest ?
+                <Question next={()=>this.nextPage()} quest={e.quest} ans={e.ans} rightNums={e.rightNums} /> :
+                <Result/>)
+            })
             pages.push(...course)
-            pages.push(<Result/>)
         }
         this.state = {
             pages: pages,
@@ -40,11 +42,13 @@ export default class App extends Component {
 
         //State
         let pages = []
-        let course = courseData.map((e) => e.url ? 
-            <Video url={e.url} next={()=>this.nextPage()} /> :
-            <Question next={()=>this.nextPage()} quest={e.quest} ans={e.ans} rightNums={e.rightNums} />)
+        let course = courseData.map((e) => {
+            return e.url ?
+            <Video url={e.url} next={() => this.nextPage()} /> : (e.quest ?
+            <Question next={() => this.nextPage()} quest={e.quest} ans={e.ans} rightNums={e.rightNums} /> :
+            <Result />)
+        })
         pages.push(...course)
-        pages.push(<Result />)
         this.setState((prevState) => {
             return {
                 pages: [...prevState.pages, ...pages],

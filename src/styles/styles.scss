@@ -4,7 +4,7 @@ $border-color: #a00090; /*orange;*/
 
 //Text colors
 $primary-color: #41003d; /*#3f2403;*/
-$text-color: purple; /*#6f4006;*/
+$text-color: rgb(100,0,100); /*#6f4006;*/
 $select-color: #41003d; /*#6f4006;*/
 $placeholder-color: #4b0046; /*#691305;*/ 
 
@@ -104,7 +104,7 @@ body {
                 }
             }
 
-            input.input:last-of-type, div.video-react {                
+            input.input:last-of-type, div.ans:last-of-type, div.video-react {                
                 margin-bottom: 2vh;
             }
             
@@ -116,7 +116,6 @@ body {
                 background-color: white;
                 box-shadow: 0px 4px 12px 2px $shadow-color;
                 border-bottom: 0.13em solid $border-color;
-                color: $select-color;
             }
 
             input.input:focus {
@@ -140,10 +139,11 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.video-react {
-    color: $border-color !important;
-}
-
 .video-react-big-play-button {
     border-color: $border-color !important; 
+}
+
+.video-react-video {
+    border-radius: 10px !important;
+    box-shadow: 0px 3px 10px 0px $shadow-color;
 }

@@ -27,15 +27,20 @@ export default class SignIn extends Component {
                     <input className='input' type='text' name='num' placeholder='Номер студенческого' maxLength="6" value={this.state.number} onChange={this.handleChange}></input><br />
                     <input className='input' type='text' name='name' placeholder='ФИО' maxLength='50'></input>
                     <div className='button' onClick={() => {
-                        this.props.setCourseData([
-                            {url: 'http://localhost:3000/public/videos/1.mp4'}, 
-                            { quest: 'Как дела?', ans: ['Нормально', 'Хорошо', 'Отлично', 'Прекрасно'], rightNums: [2, 3] },
-                            { quest: 'Как дела? Но это будет пример огромнрого вороса с пояснениями и огромным количеством "необходимой" информации, которая нужна просто чтобы мне было неудобно верстать такой вопрос, а больше в общем то ни для чего', ans: ['Норм', 'Хорошо', 'Отлично', 'Прекрасно'], rightNums: [2, 3] },
-                            { quest: 'Как дела? Но это будет пример огромнрого вороса с пояснениями и огромным количеством "необходимой" информации, которая нужна просто чтобы мне было неудобно верстать такой вопрос, а больше в общем то ни для чего. Но на самом деле она может и не такая бесполезная, так как возможно прямо в вопросе содержится часть ответа', ans: ['Норм', 'Хорошо', 'Отлично', 'Прекрасно'], rightNums: [2, 3] }
-                        ])
-                        this.props.nextPage()
-                        //lib.sendPost()
                         this.saveProfileData()
+
+                        //Defining params for get request
+                        let url = new URL(document.URL + 'course'),
+                            params = { num: reg.num.value, name: reg.name.value }
+                        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+                        //Getting course data
+                        fetch(url)
+                            .then(res => res.json())
+                            .then(json => {
+                                this.props.setCourseData(json)
+                                this.props.nextPage()
+                            })
                     }}>Войти</div>
                 </form>
             </div>
