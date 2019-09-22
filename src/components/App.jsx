@@ -36,7 +36,7 @@ export default class App extends Component {
         this.setCourseData = this.setCourseData.bind(this)
     }  
     
-    setCourseData(courseData) {
+    setCourseData(courseData, currentPage) {
         //Storage
         localStorage.setItem('courseData', JSON.stringify(courseData))
 
@@ -52,7 +52,7 @@ export default class App extends Component {
         this.setState((prevState) => {
             return {
                 pages: [...prevState.pages, ...pages],
-                current: 0
+                current: currentPage
             }
         })
     }

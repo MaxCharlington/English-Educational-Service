@@ -4,15 +4,27 @@ import {setCookie} from '../js/lib'
 export default class SignIn extends Component {
     constructor() {
         super()
-        this.state = { number: "" };
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { number: "" }
+        this.handleChange = this.handleChange.bind(this)
     } 
 
     handleChange(e) {
-        this.setState({
-            number: e.target.value.replace(/[^0-9]/, '')
-        });
-    };
+        //Handles number input
+        if (e.target.getAttribute('name') === 'num') {
+            this.setState({
+                number: e.target.value.replace(/[^0-9]/, '')
+            })
+        }
+        //Enables/Disables button
+        this.buttonHandler()
+    }
+
+    buttonHandler() {
+        let inputsMatch = document.reg.num.value.match(/^\d\d\d\d\d\d$/) && document.reg.name.value.match(/^\D+\s\D+\s\D+$/us)
+        if ((document.querySelector('div.button.disabled') && inputsMatch) || (!inputsMatch && !document.querySelector('div.button.disabled'))) {
+            document.querySelector('div.button').classList.toggle('disabled')
+        }
+     }
 
     saveProfileData() {
         setCookie('num', document.reg.num.value)
@@ -25,8 +37,8 @@ export default class SignIn extends Component {
                 <h1 className="comment">Введите ваши данные</h1>
                 <form name="reg">
                     <input className='input' type='text' name='num' placeholder='Номер студенческого' maxLength="6" value={this.state.number} onChange={this.handleChange}></input><br />
-                    <input className='input' type='text' name='name' placeholder='ФИО' maxLength='50'></input>
-                    <div className='button' onClick={() => {
+                    <input className='input' type='text' name='name' placeholder='ФИО' maxLength='50' onChange={this.handleChange}></input>
+                    <div className='button disabled' onClick={() => {
                         this.saveProfileData()
 
                         //Defining params for get request

@@ -26,19 +26,13 @@ app.use(expressLogging(logger))
 app.use('/public', express.static('public'))
 
 //Request handlers
+//For students
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/index.html", req.cookies)
 })
 
-app.post('/', function (req, res) {
-    console.log(req.body)
-})
-
-app.get('/result', function (req, res) {
-    res.send('{"result": "80%"}')
-})
-
 app.get('/course', function (req, res) {
+    //console.log(req.query.num + ' ' + req.query.name);
     res.send(JSON.stringify([
             { url: 'http://localhost:3000/public/videos/1.mp4' },
             { quest: 'Как дела?', ans: ['Нормально', 'Хорошо', 'Отлично', 'Прекрасно'], rightNums: [2, 3] },
@@ -46,7 +40,21 @@ app.get('/course', function (req, res) {
             { }//As Result
         ])
     )
-}) 
+})
+
+app.get('/current', function (req, res) {
+    res.send(JSON.stringify({current: 1}))
+})
+
+app.get('/result', function (req, res) {
+    res.send(JSON.stringify({result: '80%'}))
+})
+
+//For teachers
+app.get('/results', function (req, res) {
+    res.send('none')
+})
+
 
 //Start server
 app.listen(3000, function (err) {

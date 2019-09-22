@@ -1,6 +1,7 @@
 $bg-color: #fffffc;
 $shadow-color: #c000b5; /*#f8a44f;*/ 
 $border-color: #a00090; /*orange;*/
+$disabled-color: #c38ec0;
 
 //Text colors
 $primary-color: #41003d; /*#3f2403;*/
@@ -56,8 +57,13 @@ body {
                 box-shadow: 0px 3px 10px 0px $shadow-color;
                 z-index: 1;
                 text-align: center;
-                transition: all 0.3s cubic-bezier(0.95, 0.05, 0.795, 0.035); //Optimal curve for smooth animations              
+                transition: all 0.15s cubic-bezier(0.95, 0.05, 0.795, 0.035); //Optimal curve for smooth animations              
                 border-bottom: 0 solid $border-color;
+            }
+
+            div.button.disabled {
+                color: $disabled-color;
+                box-shadow: 0px 3px 10px 0px $disabled-color;
             }
 
             div.quest, h1.comment, div.result {
@@ -108,7 +114,7 @@ body {
                 margin-bottom: 2vh;
             }
             
-            div.button:hover, div.ans:hover, input.input:focus {
+            div.button:not(.disabled):hover, div.ans:hover, input.input:focus {
                 //Size
                 transform: scale(1.02);                
                 -webkit-transform: scale(1.02);
