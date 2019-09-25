@@ -20,7 +20,7 @@ export default class SignIn extends Component {
     }
 
     buttonHandler() {
-        let inputsMatch = document.reg.num.value.match(/^\d\d\d\d\d\d$/) && document.reg.name.value.match(/^\D+\s\D+\s\D+$/us)
+        let inputsMatch = document.reg.num.value.match(/^\d\d\d\d\d\d$/) && document.reg.name.value.match(/^[А-Я][а-я]+\s[А-Я][а-я]+\s[А-Я][а-я]+$|^[A-Z][a-z]+\s[A-Z][a-z]+\s[A-Z][a-z]+$/u)
         if ((document.querySelector('div.button.disabled') && inputsMatch) || (!inputsMatch && !document.querySelector('div.button.disabled'))) {
             document.querySelector('div.button').classList.toggle('disabled')
         }
@@ -41,17 +41,24 @@ export default class SignIn extends Component {
                     <div className='button disabled' onClick={() => {
                         this.saveProfileData()
 
-                        //Defining params for get request
-                        let url = new URL(document.URL + 'course'),
+                        let urlCourse = new URL(document.URL + 'course'),
                             params = { num: reg.num.value, name: reg.name.value }
-                        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+                        Object.keys(params).forEach(key => urlCourse.searchParams.append(key, params[key]))
 
                         //Getting course data
-                        fetch(url)
+                        fetch(urlCourse)
                             .then(res => res.json())
-                            .then(json => {
-                                this.props.setCourseData(json)
-                                this.props.nextPage()
+                            .then(jsonCourse => {
+                                let urlCurrent = new URL(document.URL + 'current') //Params are the same
+                                Object.keys(params).forEach(key => urlCurrent.searchParams.append(key, params[key]))
+
+                                //Getting current progress
+                                fetch(urlCurrent)
+                                    .then(res => res.json())
+                                    .then(jsonCurrent => {
+                                        this.props.setCourseData(jsonCourse, jsonCurrent.current)                                        
+                                        this.props.nextPage()
+                                    })
                             })
                     }}>Войти</div>
                 </form>

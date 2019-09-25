@@ -13,7 +13,7 @@ export default class App extends Component {
         let current = parseInt(getCookie('current'))
         if (!current) { //Check if user already used the app
             //Let user sign in to load provided course data
-            pages.push(<SignIn setCourseData={(data) => this.setCourseData(data)} nextPage={() => this.nextPage()} />)
+            pages.push(<SignIn setCourseData={(data, num) => this.setCourseData(data, num)} nextPage={() => this.nextPage()} />)
             current = 0
         }
         else {
@@ -39,6 +39,7 @@ export default class App extends Component {
     setCourseData(courseData, currentPage) {
         //Storage
         localStorage.setItem('courseData', JSON.stringify(courseData))
+        localStorage.setItem('current', currentPage)        
 
         //State
         let pages = []
@@ -55,9 +56,10 @@ export default class App extends Component {
                 current: currentPage
             }
         })
+        console.log(this.state)
     }
 
-    nextPage() {
+    nextPage(pageNumber) {
         document.getElementById('app').firstChild.classList.toggle('zoomOutLeft')
         setTimeout(() => {
             document.getElementById('app').firstChild.classList.toggle('zoomOutLeft')

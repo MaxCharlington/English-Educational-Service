@@ -26,6 +26,7 @@ app.use(expressLogging(logger))
 app.use('/public', express.static('public'))
 
 //Request handlers
+
 //For students
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/index.html", req.cookies)
@@ -43,7 +44,7 @@ app.get('/course', function (req, res) {
 })
 
 app.get('/current', function (req, res) {
-    res.send(JSON.stringify({current: 1}))
+    res.send(JSON.stringify({current: 0}))
 })
 
 app.get('/result', function (req, res) {
@@ -52,7 +53,11 @@ app.get('/result', function (req, res) {
 
 //For teachers
 app.get('/results', function (req, res) {
-    res.send('none')
+    res.send('This feature is not ready')
+})
+
+app.get('/creation', function (req, res) {
+    res.send('This feature is not ready')
 })
 
 
